@@ -2,13 +2,22 @@ const express = require('express')
 const router = express.Router()
 
 // Controller
+const { insertPhoto } = require('../controller/PhotoControler')
 
 // Middlewares
 const { photoInsertValidation } = require('../middlewares/photoValidation')
 const authGuard = require('../middlewares/authGuard')
-const validade = require('../middlewares/handleValidation')
+const validate = require('../middlewares/handleValidation')
+const { imageUpload } = require('../middlewares/imageUpload')
 
 
 // Routes
+router.post('/',
+    authGuard,
+    imageUpload.single('image'),
+    photoInsertValidation(),
+    validate,
+    insertPhoto
+)
 
 module.exports = router
