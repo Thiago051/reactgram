@@ -119,18 +119,18 @@ const updatePhoto = async (req, res) => {
 
     await photo.save()
 
-    res.status(200).json({photo, message: 'Foto atualizada com sucesso.'})
+    res.status(200).json({ photo, message: 'Foto atualizada com sucesso.' })
 }
 
 // like funcionality
 const likePhoto = async (req, res) => {
 
-    const {id} = req.params
+    const { id } = req.params
 
     const reqUser = req.user
 
     const photo = await Photo.findById(id)
-    
+
     // check if photo exists
     if (!photo) {
         res.status(404).json({ errors: ['Foto não encontrada.'] })
@@ -138,8 +138,8 @@ const likePhoto = async (req, res) => {
     }
 
     // check if user already liked the photo
-    if(photo.likes.includes(reqUser._id)) {
-        res.status(422).json({errors: ['Você já curtiu a foto.']})
+    if (photo.likes.includes(reqUser._id)) {
+        res.status(422).json({ errors: ['Você já curtiu a foto.'] })
         return
     }
 
@@ -148,7 +148,42 @@ const likePhoto = async (req, res) => {
 
     await photo.save()
 
-    res.status(200).json({photoId: id, userId: reqUser._id, message: 'A foto foi curtida'})
+    res.status(200).json({ photoId: id, userId: reqUser._id, message: 'A foto foi curtida' })
+}
+
+// comment funcionality
+const commentPhoto = async (req, res) => {
+
+    const { id } = req.params
+    const { comment } = req.body
+
+    const user = await User.findById(req.user._id)
+
+    const photo = await Photo.findById(id)
+
+    // check if photo exists
+    if (!photo) {
+        res.status(404).json({ errors: ['Foto não encontrada.'] })
+        return
+    }
+
+    // put comment in array comments
+    const userComment = {
+        comment,
+        userName: user.name,
+        userImage: user.profileImage,
+        userId: user._id
+    }
+
+    photo.comments.push(userComment)
+
+    await photo.save()
+
+    res.status(200).json({
+        comment: userComment,
+        message: 'O comentário foi adicionado com sucesso.'
+    })
+
 }
 
 module.exports = {
@@ -158,5 +193,6 @@ module.exports = {
     getUserPhotos,
     getPhotoById,
     updatePhoto,
-    likePhoto
+    likePhoto,
+    commentPhoto
 }
