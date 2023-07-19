@@ -21,13 +21,30 @@ const register = async (data) => {
 }
 
 // logout an user
-const logout =  () => {
+const logout = () => {
     localStorage.removeItem('user')
+}
+
+// sign in an user
+const login = async (data) => {
+
+    const config = requestConfig('POST', data)
+
+    const res = await fetch(`${api}/users/login`, config)
+        .then((res) => res.json())
+        .catch((err) => err)
+
+    if(res) {
+        localStorage.setItem('user', JSON.stringify(res))
+    }
+
+    return res
 }
 
 const authService = {
     register,
-    logout
+    logout,
+    login
 }
 
 export default authService
