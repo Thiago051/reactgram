@@ -15,6 +15,7 @@ import { useAuth } from './hooks/useAuth'
 import Home from './pages/Home/Home'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
+import EditProfile from './pages/EditProfile/EditProfile'
 
 // Components
 import NavBar from './components/NavBar/NavBar'
@@ -36,6 +37,9 @@ function App() {
         <NavBar />
         <div className="container">
           <Routes>
+            <Route path='/profile'
+              element={auth ? <EditProfile /> : <Navigate to={'/login'} />}
+            />
             <Route path='/'
               element={auth ? <Home /> : <Navigate to={'/login'} />}
             />
