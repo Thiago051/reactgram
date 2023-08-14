@@ -129,17 +129,22 @@ const Profile = () => {
                                         alt={photo.title}
                                     />
                                 )}
+                                {id === userAuth._id ? (
+                                    <div className="actions">
+                                        <Link to={`/photos/${photo._id}`}>
+                                            <BsFillEyeFill />
+                                        </Link>
+                                        <BsPencilFill onClick={() => handleEdit(photo)} />
+                                        <BsXLg onClick={() => handleDelete(photo._id)} />
+                                    </div>
+                                ) : (
+                                    <Link className="btn" to={`/photos/${photo._id}`}>
+                                        Ver
+                                    </Link>
+                                )}
                             </div>
-                        ))
-                    }
-
-                    {id === userAuth._id ? (
-                        <p>actions</p>
-                    ) : (
-                        <Link className="btn" to={`/photos/${photo._id}`}>Ver</Link>
-                    )}
-
-                    {photos.length === 0 && <p>Ainda não há fotos publicadas</p>}
+                        ))}
+                    {photos.length === 0 && <p>Ainda não há fotos publicadas...</p>}
 
                 </div>
             </div>
