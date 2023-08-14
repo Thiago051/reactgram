@@ -107,10 +107,10 @@ const Profile = () => {
                                 <span>Imagem:</span>
                                 <input type="file" onChange={handleFile} />
                             </label>
-                            {/* {!loadingPhoto && <input type="submit" value="Postar" />}
-                            {loadingPhoto && <input type="submit" disabled value="Aguarde..." />} */}
-                            {console.log('loadingPhoto', loadingPhoto)}
-                            <input type="submit" value="Postar" />
+                            {!loadingPhoto && <input type="submit" value="Postar" />}
+                            {loadingPhoto && <input type="submit" disabled value="Aguarde..." />}
+                            {/* {console.log('loadingPhoto', loadingPhoto)}
+                            <input type="submit" value="Postar" /> */}
                         </form>
                     </div>
                     {errorPhoto && <Message msg={errorPhoto} type={'error'} />}
