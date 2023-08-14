@@ -14,7 +14,7 @@ import { useParams } from 'react-router-dom'
 
 // redux
 import { getUserDetails } from '../../slices/userSlice'
-import { publishPhoto, resetMessage, getUserPhotos } from '../../slices/photoSlice'
+import { publishPhoto, resetMessage, getUserPhotos, deletePhoto } from '../../slices/photoSlice'
 
 
 const Profile = () => {
@@ -49,6 +49,12 @@ const Profile = () => {
         setImage(image)
     }
 
+    const resetCompontMessage = () => {
+        setTimeout(() => {
+            dispatch(resetMessage())
+        }, 2000);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -69,9 +75,13 @@ const Profile = () => {
 
         setTitle('')
 
-        setTimeout(() => {
-            dispatch(resetMessage())
-        }, 2000);
+        resetCompontMessage()
+    }
+
+    // delete a photo
+    const handleDelete = (id) => {
+        dispatch(deletePhoto(id))
+        resetCompontMessage()
     }
 
     if (loading) {
