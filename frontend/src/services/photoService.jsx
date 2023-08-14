@@ -20,7 +20,7 @@ const getUserPhotos = async (id) => {
     const config = requestConfig('GET', null, token)
 
     try {
-        const res = await fetch(`${api}/photos/users/${id}`, config)
+        const res = await fetch(`${api}/photos/user/${id}`, config)
             .then((res) => res.json())
             .catch((err) => err)
 
