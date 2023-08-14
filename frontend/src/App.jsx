@@ -16,6 +16,7 @@ import Home from './pages/Home/Home'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
 import EditProfile from './pages/EditProfile/EditProfile'
+import Profile from './pages/Profile/Profile'
 
 // Components
 import NavBar from './components/NavBar/NavBar'
@@ -39,6 +40,9 @@ function App() {
           <Routes>
             <Route path='/profile'
               element={auth ? <EditProfile /> : <Navigate to={'/login'} />}
+            />
+            <Route path='/users/:id'
+              element={auth ? <Profile /> : <Navigate to={'/login'} />}
             />
             <Route path='/'
               element={auth ? <Home /> : <Navigate to={'/login'} />}
