@@ -68,6 +68,18 @@ export const photoSlice = createSlice({
                     state.error = action.payload
                     state.photo = {}
                 })
+            .addCase(getUserPhotos.pending,
+                (state) => {
+                    state.loading = true
+                    state.error = false
+                })
+            .addCase(getUserPhotos.fulfilled,
+                (state, action) => {
+                    state.loading = false
+                    state.sucsses = true
+                    state.error = null
+                    state.photo = action.payload
+                })
     }
 }
 )
