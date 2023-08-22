@@ -144,7 +144,7 @@ const likePhoto = async (req, res) => {
     }
 
     // put user id in likes array
-    photo.likes.push(reqUser.id)
+    photo.likes.push(reqUser._id)
 
     await photo.save()
 
