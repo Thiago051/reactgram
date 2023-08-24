@@ -2,8 +2,9 @@ import './Serach.css'
 
 // Hooks
 import { useEffect } from 'react'
-import { UseSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useResetComponentMessage } from '../../hooks/useResetComponentMessage'
+import { useQuery } from '../../hooks/useQuery'
 
 // Components
 import LikeContainer from '../../components/LikeContainer/LikeContainer'
