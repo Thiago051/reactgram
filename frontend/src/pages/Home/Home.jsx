@@ -13,7 +13,6 @@ import { useResetComponentMessage } from '../../hooks/useResetComponentMessage'
 
 // Redux
 import { getPhotos, like } from '../../slices/photoSlice'
-import { uploads } from '../../utils/config'
 
 const Home = () => {
 
